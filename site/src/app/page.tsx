@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import EntryCard from "../components/EntryCard";
 import { fetchManifest, fetchRank, filterRows } from "../lib/catalog";
-import type { Manifest, SlimEntry } from "../lib/format";
+import { BASE_PATH, type Manifest, type SlimEntry } from "../lib/format";
 import { CATEGORIES, KINDS, RANK_TABS } from "../lib/taxonomy";
 
 const PAGE_SIZE = 50;
@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <div>
-      <form className="searchline" action="/search">
+      <form className="searchline" action={`${BASE_PATH}/search`}>
         <input type="search" name="q" placeholder="이름·요약·태그로 검색 — 예: notion, 데이터베이스, 브라우저" aria-label="검색어" />
         <button type="submit">검색</button>
       </form>

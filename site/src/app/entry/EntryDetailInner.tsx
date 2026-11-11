@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import InstallCommands from "../../components/InstallCommands";
 import StarChart from "../../components/StarChart";
 import { fetchEntry } from "../../lib/catalog";
-import { KIND_LABEL, avatarFromSlug } from "../../lib/format";
+import { BASE_PATH, KIND_LABEL, avatarFromSlug } from "../../lib/format";
 import type { EntryDetail } from "../../lib/format";
 
 const SOURCE_LABEL: Record<string, string> = {
@@ -66,7 +66,7 @@ export default function EntryDetailInner() {
             원문에서 보기 ↗
           </a>
         ) : null}
-        <a className="ghost" href="/">
+        <a className="ghost" href={`${BASE_PATH}/`}>
           랭킹으로
         </a>
       </div>

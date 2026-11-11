@@ -85,3 +85,6 @@ export function momentumDays(values: number[]): number {
   }
   return n;
 }
+
+/** Next basePath — form action, raw a[href] 등에 수동으로 붙여야 함 (Link는 자동). */
+export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
