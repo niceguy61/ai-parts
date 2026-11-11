@@ -3,9 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import EntryCard from "../../components/EntryCard";
 import { fetchSearchIndex, filterRows, type SearchRow } from "../../lib/catalog";
-import type { SlimEntry } from "../../lib/format";
+import { BASE_PATH, avatarFromSlug, formatNumber, KIND_LABEL, type SlimEntry } from "../../lib/format";
 import { CATEGORIES, KINDS } from "../../lib/taxonomy";
-import { avatarFromSlug, formatNumber, KIND_LABEL } from "../../lib/format";
 
 const PAGE_SIZE = 50;
 
@@ -70,8 +69,7 @@ export default function SearchPage() {
                 sp: [], mo: null, cr: null,
               };
               return (
-                <div key={r.slug} className="slip" style={{ cursor: "pointer" }}
-                     onClick={() => { window.location.href = `/entry?slug=${r.slug}`; }}>
+                <a key={r.slug} className="slip" href={`${BASE_PATH}/entry?slug=${r.slug}`}>
                   <span className="rank">{String((page - 1) * PAGE_SIZE + i + 1).padStart(2, "0")}</span>
                   <span className="who">
                     <span className="titlerow">
@@ -87,7 +85,7 @@ export default function SearchPage() {
                   <span className="nums">
                     <span className="stars"><span className="icon">⭐</span>{formatNumber(r.st)}</span>
                   </span>
-                </div>
+                </a>
               );
             })}
           </div>
