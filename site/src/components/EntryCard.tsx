@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { KIND_LABEL, avatarFromSlug, formatNumber } from "../lib/format";
+import { BASE_PATH, KIND_LABEL, avatarFromSlug, formatNumber } from "../lib/format";
 import type { SlimEntry } from "../lib/format";
 
 /** 72×26 미니 스파크라인 — 리스트에서 추이를 바로 본다. */
@@ -35,7 +34,7 @@ export default function EntryCard({ entry, rank }: { entry: SlimEntry; rank?: nu
   const repoPath = entry.slug;
 
   return (
-    <Link className="slip" href={`/entry?slug=${entry.slug}`}>
+    <a className="slip" href={`${BASE_PATH}/entry?slug=${entry.slug}`}>
       <span className={`rank${(rank ?? 99) <= 3 ? " top" : ""}`}>
         {rank !== undefined ? String(rank).padStart(2, "0") : ""}
       </span>
@@ -69,6 +68,6 @@ export default function EntryCard({ entry, rank }: { entry: SlimEntry; rank?: nu
           <span className="installs">📥 {formatNumber(entry.in)}</span>
         ) : null}
       </span>
-    </Link>
+    </a>
   );
 }

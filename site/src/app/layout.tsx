@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import "./globals.css";
+import { BASE_PATH } from "../lib/format";
 
 export const metadata: Metadata = {
   title: "ai_insight — AI 부품 랭킹 포털",
@@ -14,13 +14,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <header className="site">
           <div className="container inner">
-            <Link href="/" className="logo">
+            <a href={`${BASE_PATH}/`} className="logo">
               ai<em>_</em>insight
-            </Link>
+            </a>
             <span className="tagline">AI 부품 장부 — MCP · 스킬 · 플러그인</span>
             <nav>
-              <Link href="/">랭킹</Link>
-              <Link href="/search">검색</Link>
+              <a href={`${BASE_PATH}/`}>랭킹</a>
+              <a href={`${BASE_PATH}/search`}>검색</a>
             </nav>
           </div>
         </header>
