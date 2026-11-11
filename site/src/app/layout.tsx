@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { BASE_PATH } from "../lib/format";
+import DataTimestamp from "../components/DataTimestamp";
 
 export const metadata: Metadata = {
   title: "ai_insight — AI 부품 랭킹 포털",
@@ -28,6 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="site">
           <div className="container">
             모든 항목은 원문 출처 링크와 함께 제공됩니다 · 출처: GitHub, skills.sh, ClawHub, 공식 MCP Registry, npm
+            <DataTimestamp />
           </div>
         </footer>
       </body>
