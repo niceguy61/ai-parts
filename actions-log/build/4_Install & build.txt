@@ -1,0 +1,39 @@
+﻿2026-11-11T01:31:36.9545124Z ##[group]Run npm ci
+2026-11-11T01:31:36.9545486Z [36;1mnpm ci[0m
+2026-11-11T01:31:36.9545744Z [36;1mPAGES_BUILD=1 npm run build[0m
+2026-11-11T01:31:36.9607950Z shell: /usr/bin/bash -e {0}
+2026-11-11T01:31:36.9608253Z ##[endgroup]
+2026-11-11T01:31:44.7842338Z 
+2026-11-11T01:31:44.7848952Z added 80 packages, and audited 81 packages in 8s
+2026-11-11T01:31:44.7849493Z 
+2026-11-11T01:31:44.7849746Z 17 packages are looking for funding
+2026-11-11T01:31:44.7850106Z   run `npm fund` for details
+2026-11-11T01:31:44.8237810Z 
+2026-11-11T01:31:44.8238390Z 2 vulnerabilities (1 moderate, 1 high)
+2026-11-11T01:31:44.8238807Z 
+2026-11-11T01:31:44.8239311Z To address all issues (including breaking changes), run:
+2026-11-11T01:31:44.8239907Z   npm audit fix --force
+2026-11-11T01:31:44.8240119Z 
+2026-11-11T01:31:44.8240291Z Run `npm audit` for details.
+2026-11-11T01:31:44.9777324Z 
+2026-11-11T01:31:44.9778002Z > ai-insight-web@0.1.0 build
+2026-11-11T01:31:44.9778440Z > next build
+2026-11-11T01:31:44.9778601Z 
+2026-11-11T01:31:45.4882419Z ⚠ No build cache found. Please configure build caching for faster rebuilds. Read more: https://nextjs.org/docs/messages/no-cache
+2026-11-11T01:31:45.5226416Z Attention: Next.js now collects completely anonymous telemetry regarding usage.
+2026-11-11T01:31:45.5228100Z This information is used to shape Next.js' roadmap and prioritize features.
+2026-11-11T01:31:45.5230410Z You can learn more, including how to opt-out if you'd not like to participate in this anonymous program, by visiting the following URL:
+2026-11-11T01:31:45.5234354Z https://nextjs.org/telemetry
+2026-11-11T01:31:45.5234751Z 
+2026-11-11T01:31:45.6171268Z    ▲ Next.js 15.5.29
+2026-11-11T01:31:45.6171901Z 
+2026-11-11T01:31:45.6650502Z    Creating an optimized production build ...
+2026-11-11T01:31:54.3533034Z  ✓ Compiled successfully in 6.4s
+2026-11-11T01:31:54.3572666Z    Linting and checking validity of types ...
+2026-11-11T01:31:57.2400697Z    Collecting page data ...
+2026-11-11T01:31:57.6406010Z Error: export const dynamic = "force-static"/export const revalidate not configured on route "/sitemap.xml" with "output: export". See more info here: https://nextjs.org/docs/advanced-features/static-html-export
+2026-11-11T01:31:57.6425564Z     at <unknown> (.next/server/app/sitemap.xml/route.js:1:17008)
+2026-11-11T01:31:57.6514623Z 
+2026-11-11T01:31:57.6515206Z > Build error occurred
+2026-11-11T01:31:57.6581920Z [Error: Failed to collect page data for /sitemap.xml] { type: 'Error' }
+2026-11-11T01:31:57.6831811Z ##[error]Process completed with exit code 1.
