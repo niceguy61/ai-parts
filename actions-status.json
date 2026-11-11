@@ -1,28 +1,28 @@
 {
-  "total_count": 16,
+  "total_count": 18,
   "workflow_runs": [
     {
-      "id": 42956248936,
+      "id": 42973127987,
       "name": "Deploy to GitHub Pages",
-      "node_id": "WFR_kwLOVqB25M8AAAAKAGRXaA",
+      "node_id": "WFR_kwLOVqB25M8AAAAKAWXlMw",
       "head_branch": "main",
-      "head_sha": "3d885cc1129758aa87a43d19788fed06977a8596",
+      "head_sha": "29cee06caf9e1cb4de721850d62be3b72bdb791d",
       "path": ".github/workflows/deploy.yml",
-      "display_title": "fix: search results as real anchor links with basePath",
-      "run_number": 16,
+      "display_title": "fix: search matches name only with relevance ranking; apply URL q par…",
+      "run_number": 18,
       "event": "push",
       "status": "completed",
       "conclusion": "success",
       "workflow_id": 414067136,
-      "check_suite_id": 116331968527,
-      "check_suite_node_id": "CS_kwDOVqB25M8AAAAbFez4Dw",
-      "url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42956248936",
-      "html_url": "https://github.com/niceguy61/ai-parts/actions/runs/42956248936",
+      "check_suite_id": 116375530984,
+      "check_suite_node_id": "CS_kwDOVqB25M8AAAAbGIWt6A",
+      "url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987",
+      "html_url": "https://github.com/niceguy61/ai-parts/actions/runs/42973127987",
       "pull_requests": [
 
       ],
-      "created_at": "2026-11-11T03:59:12Z",
-      "updated_at": "2026-11-11T04:00:06Z",
+      "created_at": "2026-11-11T06:32:19Z",
+      "updated_at": "2026-11-11T06:33:12Z",
       "actor": {
         "login": "niceguy61",
         "id": 23160963,
@@ -48,7 +48,7 @@
       "referenced_workflows": [
 
       ],
-      "run_started_at": "2026-11-11T03:59:12Z",
+      "run_started_at": "2026-11-11T06:32:19Z",
       "triggering_actor": {
         "login": "niceguy61",
         "id": 23160963,
@@ -70,19 +70,19 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "jobs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42956248936/jobs",
-      "logs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42956248936/logs",
-      "check_suite_url": "https://api.github.com/repos/niceguy61/ai-parts/check-suites/116331968527",
-      "artifacts_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42956248936/artifacts",
-      "cancel_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42956248936/cancel",
-      "rerun_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42956248936/rerun",
+      "jobs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/jobs",
+      "logs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/logs",
+      "check_suite_url": "https://api.github.com/repos/niceguy61/ai-parts/check-suites/116375530984",
+      "artifacts_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/artifacts",
+      "cancel_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/cancel",
+      "rerun_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/rerun",
       "previous_attempt_url": null,
       "workflow_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/workflows/414067136",
       "head_commit": {
-        "id": "3d885cc1129758aa87a43d19788fed06977a8596",
-        "tree_id": "40ce2329bca8a98a5ee3fe303956092fc4f7f2dd",
-        "message": "fix: search results as real anchor links with basePath",
-        "timestamp": "2026-11-11T03:59:09Z",
+        "id": "29cee06caf9e1cb4de721850d62be3b72bdb791d",
+        "tree_id": "831f1895049e8d9b992bf4fff608d040d345dd50",
+        "message": "fix: search matches name only with relevance ranking; apply URL q param on load",
+        "timestamp": "2026-11-11T06:32:15Z",
         "author": {
           "name": "niceguy61",
           "email": "niceguy61@naver.com"

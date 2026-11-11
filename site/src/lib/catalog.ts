@@ -55,8 +55,13 @@ export interface SearchFilter {
   kind?: string;
 }
 
-/** 클라이언트 검색·필터 — 인덱스 행에 적용. 검색은 이름(name)만 매칭한다. */
-export function filterRows<T extends { n: string; st: number; cat: string | null; k: string }>(
+/** 클라이언트 검색·필터 — 인덱스 행에 적용.
+ *
+ * 매칭: 이름 → 요약 → 태그 (전부 substring).
+ * 관련도 정렬: 이름 정확 일치 > 이름 접두 > 이름 포함 > 요약 포함 > 태그 포함,
+ * 동점은 별점 내림차순.
+ */
+export function filterRows<T extends { n: string; sh: string | null; tg: string[]; st: number; cat: string | null; k: string }>(
   rows: T[],
   f: SearchFilter,
 ): T[] {
@@ -64,20 +69,25 @@ export function filterRows<T extends { n: string; st: number; cat: string | null
   const matched = rows.filter((r) => {
     if (f.category && r.cat !== f.category) return false;
     if (f.kind && r.k !== f.kind) return false;
-    if (q && !r.n.toLowerCase().includes(q)) return false;
-    return true;
+    if (!q) return true;
+    return (
+      r.n.toLowerCase().includes(q) ||
+      (r.sh ?? "").toLowerCase().includes(q) ||
+      r.tg.some((t) => t.toLowerCase().includes(q))
+    );
   });
   if (!q) return matched;
-  // 관련도 정렬 — 정확히 일치 > 접두 > 포함, 동점은 별점 내림차순
-  const score = (n: string): number => {
+
+  const score = (r: T): number => {
+    const n = r.n.toLowerCase();
     if (n === q) return 0;
     if (n.startsWith(q)) return 1;
-    return 2;
+    if (n.includes(q)) return 2;
+    if ((r.sh ?? "").toLowerCase().includes(q)) return 3;
+    return 4; // 태그
   };
-  return matched.sort((a, b) => {
-    const sa = score(a.n.toLowerCase());
-    const sb = score(b.n.toLowerCase());
-    if (sa !== sb) return sa - sb;
-    return b.st - a.st;
-  });
+  return matched
+    .map((r) => ({ r, s: score(r) }))
+    .sort((a, b) => a.s - b.s || b.r.st - a.r.st)
+    .map((x) => x.r);
 }

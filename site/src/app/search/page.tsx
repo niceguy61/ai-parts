@@ -48,7 +48,7 @@ function SearchPageInner() {
           type="search"
           value={q}
           onChange={(e) => { setQ(e.target.value); setPage(1); }}
-          placeholder="이름으로 검색 — 예: notion, rea, browser"
+          placeholder="검색어 (이름·요약·태그)"
           aria-label="검색어"
         />
         <button type="submit">검색</button>
