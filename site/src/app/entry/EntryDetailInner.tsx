@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
@@ -50,23 +50,23 @@ export default function EntryDetailInner() {
         {entry.name}
       </h1>
       <div className="subline">
-        <span className="mono">{KIND_LABEL[entry.kind] ?? entry.kind}</span>
-        {entry.category ? <span>{entry.category}</span> : null}
-        <span className="mono">⭐ {entry.stars.toLocaleString()}</span>
-        {entry.d7 && entry.d7 > 0 ? <span className="rise">+{entry.d7.toLocaleString()}/7d</span> : null}
-        {entry.installs ? <span className="mono">설치 {entry.installs.toLocaleString()}</span> : null}
-        {entry.npmMonthly ? <span className="mono">npm/월 {entry.npmMonthly.toLocaleString()}</span> : null}
-        {entry.license ? <span>{entry.license}</span> : null}
-        {entry.repo ? <span>{entry.repo.replace("https://github.com/", "")}</span> : null}
+        <span className="chip accent">{KIND_LABEL[entry.kind] ?? entry.kind}</span>
+        {entry.category ? <span className="chip">{entry.category}</span> : null}
+        <span className="chip gold">⭐ {entry.stars.toLocaleString()}</span>
+        {entry.d7 && entry.d7 > 0 ? <span className="chip rise">▲ +{entry.d7.toLocaleString()} / 7d</span> : null}
+        {entry.installs ? <span className="chip">📥 {entry.installs.toLocaleString()}</span> : null}
+        {entry.npmMonthly ? <span className="chip">npm/월 {entry.npmMonthly.toLocaleString()}</span> : null}
+        {entry.license ? <span className="chip">{entry.license}</span> : null}
+        {entry.repo ? <span className="chip">{entry.repo.replace("https://github.com/", "")}</span> : null}
       </div>
 
       <div className="cta">
         {primary ? (
-          <a className="btn primary" href={primary} target="_blank" rel="noreferrer">
+          <a className="primary" href={primary} target="_blank" rel="noreferrer">
             원문에서 보기 ↗
           </a>
         ) : null}
-        <a className="btn" href="/">
+        <a className="ghost" href="/">
           랭킹으로
         </a>
       </div>
