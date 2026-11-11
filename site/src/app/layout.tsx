@@ -21,7 +21,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <nav>
               <Link href="/">랭킹</Link>
               <Link href="/search">검색</Link>
-              <Link href="/admin">관리</Link>
             </nav>
           </div>
         </header>

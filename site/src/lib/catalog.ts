@@ -3,7 +3,7 @@
 /** 공개 카탈로그 데이터 레이어 — Pages(local /data)와 GitHub Pages 양쪽에서 동일 동작. */
 import type { EntryDetail, Manifest, SlimEntry } from "./format";
 
-const DATA = "/data";
+const DATA = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/data`;
 const mem = new Map<string, Promise<unknown>>();
 
 function fetchJSON<T>(url: string): Promise<T> {
