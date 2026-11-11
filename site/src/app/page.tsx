@@ -78,6 +78,7 @@ export default function Home() {
         {kind ? ` · ${KINDS.find((k) => k.value === kind)?.label}` : ""}
         {category ? ` · ${category}` : ""}
         {filtered.length > 0 ? ` · ${filtered.length.toLocaleString()}개` : ""}
+        {manifest ? ` · 최종 업데이트 ${new Date(manifest.generatedAt).toLocaleString("ko-KR")}` : ""}
       </p>
 
       {error ? (

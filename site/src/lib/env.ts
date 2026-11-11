@@ -7,6 +7,7 @@ import path from "path";
  */
 
 export const COLLECTOR_URL = process.env.COLLECTOR_URL ?? "http://127.0.0.1:8111";
+export const PAGES_REPO_PATH = process.env.PAGES_REPO_PATH ?? path.join(process.cwd(), "..", "pages");
 
 let cachedToken: string | undefined;
 

@@ -25,12 +25,7 @@ jobs:
           cache: npm
           cache-dependency-path: site/package-lock.json
 
-      # 정적 export는 서버 라우트(admin·api)와 양립하지 않으므로 빌드 시 제외
-      - name: Exclude admin & api routes
-        run: |
-          mv site/src/app/admin /tmp/admin
-          mv site/src/app/api /tmp/api
-
+      # 정적 export — 소스에 admin·api가 포함되지 않으므로 별도 제외 불필요
       - name: Install & build
         working-directory: site
         run: |
