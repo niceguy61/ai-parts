@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import EntryCard from "../../components/EntryCard";
 import { fetchSearchIndex, filterRows, type SearchRow } from "../../lib/catalog";
 import { BASE_PATH, avatarFromSlug, formatNumber, KIND_LABEL, type SlimEntry } from "../../lib/format";
@@ -8,10 +9,11 @@ import { CATEGORIES, KINDS } from "../../lib/taxonomy";
 
 const PAGE_SIZE = 50;
 
-export default function SearchPage() {
-  const [q, setQ] = useState("");
-  const [category, setCategory] = useState("");
-  const [kind, setKind] = useState("");
+function SearchPageInner() {
+  const params = useSearchParams();
+  const [q, setQ] = useState(() => params.get("q") ?? "");
+  const [category, setCategory] = useState(() => params.get("cat") ?? "");
+  const [kind, setKind] = useState(() => params.get("kind") ?? "");
   const [page, setPage] = useState(1);
   const [index, setIndex] = useState<SearchRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -19,6 +21,17 @@ export default function SearchPage() {
   useEffect(() => {
     fetchSearchIndex().then(setIndex).catch(() => setError("검색 인덱스 로드 실패"));
   }, []);
+
+  // 타이핑/필터 변경 시 URL 동기화 — 공유·북마크 가능 + 새로고침에도 유지
+  useEffect(() => {
+    const usp = new URLSearchParams();
+    if (q.trim()) usp.set("q", q.trim());
+    if (category) usp.set("cat", category);
+    if (kind) usp.set("kind", kind);
+    const qs = usp.toString();
+    const url = `${BASE_PATH}/search${qs ? `?${qs}` : ""}`;
+    window.history.replaceState(null, "", url);
+  }, [q, category, kind]);
 
   const filtered = useMemo(() => {
     if (!index) return [];
@@ -35,7 +48,7 @@ export default function SearchPage() {
           type="search"
           value={q}
           onChange={(e) => { setQ(e.target.value); setPage(1); }}
-          placeholder="검색어 (이름·한줄요약·태그)"
+          placeholder="이름으로 검색 — 예: notion, rea, browser"
           aria-label="검색어"
         />
         <button type="submit">검색</button>
@@ -105,5 +118,13 @@ export default function SearchPage() {
         </>
       )}
     </div>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<p className="empty">불러오는 중…</p>}>
+      <SearchPageInner />
+    </Suspense>
   );
 }

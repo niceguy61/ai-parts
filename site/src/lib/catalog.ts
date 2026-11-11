@@ -55,22 +55,29 @@ export interface SearchFilter {
   kind?: string;
 }
 
-/** 클라이언트 검색·필터 — 인덱스 행에 적용. */
-export function filterRows<T extends { n: string; sh: string | null; tg: string[]; cat: string | null; k: string }>(
+/** 클라이언트 검색·필터 — 인덱스 행에 적용. 검색은 이름(name)만 매칭한다. */
+export function filterRows<T extends { n: string; st: number; cat: string | null; k: string }>(
   rows: T[],
   f: SearchFilter,
 ): T[] {
   const q = f.q?.trim().toLowerCase();
-  return rows.filter((r) => {
+  const matched = rows.filter((r) => {
     if (f.category && r.cat !== f.category) return false;
     if (f.kind && r.k !== f.kind) return false;
-    if (q) {
-      const hit =
-        r.n.toLowerCase().includes(q) ||
-        (r.sh ?? "").toLowerCase().includes(q) ||
-        r.tg.some((t) => t.toLowerCase().includes(q));
-      if (!hit) return false;
-    }
+    if (q && !r.n.toLowerCase().includes(q)) return false;
     return true;
+  });
+  if (!q) return matched;
+  // 관련도 정렬 — 정확히 일치 > 접두 > 포함, 동점은 별점 내림차순
+  const score = (n: string): number => {
+    if (n === q) return 0;
+    if (n.startsWith(q)) return 1;
+    return 2;
+  };
+  return matched.sort((a, b) => {
+    const sa = score(a.n.toLowerCase());
+    const sb = score(b.n.toLowerCase());
+    if (sa !== sb) return sa - sb;
+    return b.st - a.st;
   });
 }
