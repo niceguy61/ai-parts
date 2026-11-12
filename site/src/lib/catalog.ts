@@ -45,6 +45,16 @@ export function fetchEntry(slug: string): Promise<EntryDetail> {
   return fetchJSON<EntryDetail>(`${DATA}/entry/${slug}.json`);
 }
 
+/** metrics.json — {slug: [st, d7, d24, in, npm]} (별수 지표 합본) */
+export function fetchMetrics(): Promise<Record<string, [number, number | null, number | null, number | null, number | null]>> {
+  return fetchJSON(`${DATA}/metrics.json`);
+}
+
+/** history.json — {slug: [[YYYYMMDD, stars], ...]} (스타 일별 추이 합본) */
+export function fetchHistory(): Promise<Record<string, [number, number][]>> {
+  return fetchJSON(`${DATA}/history.json`);
+}
+
 export function fetchArchive(date: string): Promise<SlimEntry[]> {
   return fetchJSON<SlimEntry[]>(`${DATA}/archive/${date}.json`);
 }

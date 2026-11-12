@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import InstallCommands from "../../components/InstallCommands";
 import StarChart from "../../components/StarChart";
-import { fetchEntry } from "../../lib/catalog";
+import { fetchEntry, fetchHistory, fetchMetrics } from "../../lib/catalog";
 import { BASE_PATH, KIND_LABEL, avatarFromSlug } from "../../lib/format";
-import type { EntryDetail } from "../../lib/format";
+import type { EntryDetail, EntryHistoryPoint, EntryMetrics } from "../../lib/format";
 
 const SOURCE_LABEL: Record<string, string> = {
   github: "GitHub",
@@ -23,15 +23,29 @@ export default function EntryDetailInner() {
   const sp = useSearchParams();
   const slug = sp.get("slug") ?? "";
   const [entry, setEntry] = useState<EntryDetail | null>(null);
+  const [metrics, setMetrics] = useState<EntryMetrics | null>(null);
+  const [history, setHistory] = useState<EntryHistoryPoint[]>([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!slug) return;
     setEntry(null);
+    setMetrics(null);
+    setHistory([]);
     setError(null);
+    // 정적 전문 + 별수(metrics) + 히스토리는 각각 로드 — 부분 실패해도 나머지 표시
     fetchEntry(slug)
       .then(setEntry)
       .catch(() => setError("notfound"));
+    fetchMetrics()
+      .then((m) => {
+        const t = m[slug];
+        setMetrics(t ? { st: t[0], d7: t[1], d24: t[2], in: t[3], npm: t[4] } : null);
+      })
+      .catch(() => setMetrics(null));
+    fetchHistory()
+      .then((h) => setHistory((h[slug] ?? []).map(([d, v]) => ({ d: String(d), v }))))
+      .catch(() => setHistory([]));
   }, [slug]);
 
   if (!slug) return <p className="empty">항목이 지정되지 않았습니다.</p>;
@@ -39,6 +53,10 @@ export default function EntryDetailInner() {
   if (!entry) return <p className="empty">불러오는 중…</p>;
 
   const primary = entry.repo ?? entry.homepage ?? entry.appearances.find((a) => a.url)?.url ?? null;
+  const st = metrics?.st ?? 0;
+  const d7 = metrics?.d7 ?? null;
+  const installs = metrics?.in ?? null;
+  const npmMonthly = metrics?.npm ?? null;
 
   return (
     <article className="detail">
@@ -52,10 +70,10 @@ export default function EntryDetailInner() {
       <div className="subline">
         <span className="chip accent">{KIND_LABEL[entry.kind] ?? entry.kind}</span>
         {entry.category ? <span className="chip">{entry.category}</span> : null}
-        <span className="chip gold">⭐ {entry.stars.toLocaleString()}</span>
-        {entry.d7 && entry.d7 > 0 ? <span className="chip rise">▲ +{entry.d7.toLocaleString()} / 7d</span> : null}
-        {entry.installs ? <span className="chip">📥 {entry.installs.toLocaleString()}</span> : null}
-        {entry.npmMonthly ? <span className="chip">npm/월 {entry.npmMonthly.toLocaleString()}</span> : null}
+        <span className="chip gold">⭐ {st.toLocaleString()}</span>
+        {d7 && d7 > 0 ? <span className="chip rise">▲ +{d7.toLocaleString()} / 7d</span> : null}
+        {installs ? <span className="chip">📥 {installs.toLocaleString()}</span> : null}
+        {npmMonthly ? <span className="chip">npm/월 {npmMonthly.toLocaleString()}</span> : null}
         {entry.license ? <span className="chip">{entry.license}</span> : null}
         {entry.repo ? <span className="chip">{entry.repo.replace("https://github.com/", "")}</span> : null}
       </div>
@@ -91,7 +109,11 @@ export default function EntryDetailInner() {
 
       <section className="section">
         <h2>스타 추이</h2>
-        <StarChart points={entry.history.map((h) => ({ time: h.d, value: h.v }))} />
+        {history.length > 1 ? (
+          <StarChart points={history.map((h) => ({ time: h.d, value: h.v }))} />
+        ) : (
+          <p className="wait-note">스냅샷이 2일 이상 쌓이면 추이가 그려집니다.</p>
+        )}
       </section>
 
       <section className="section">

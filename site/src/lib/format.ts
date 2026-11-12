@@ -18,6 +18,7 @@ export interface SlimEntry {
   cr: string | null;    // github 생성일
 }
 
+/** 상세 정적 전문 — 별수(stars·delta·설치수·히스토리)는 metrics/history 합본에서 조인. */
 export interface EntryDetail {
   slug: string;
   kind: string;
@@ -31,17 +32,22 @@ export interface EntryDetail {
   repo: string | null;
   homepage: string | null;
   license: string | null;
-  stars: number;
-  d24: number | null;
-  d7: number | null;
-  installs: number | null;
-  npmMonthly: number | null;
   createdAt: string | null;
-  pushedAt: string | null;
   appearances: { source: string; external_id: string; url: string | null;
                  metrics: Record<string, unknown> | null }[];
-  history: { d: string; v: number }[];
 }
+
+/** metrics.json 한 행 — {slug: [st, d7, d24, in, npm]} */
+export interface EntryMetrics {
+  st: number;
+  d7: number | null;
+  d24: number | null;
+  in: number | null;
+  npm: number | null;
+}
+
+/** history.json 한 행 — {slug: [[YYYYMMDD, stars], ...]} */
+export type EntryHistoryPoint = { d: string; v: number };
 
 export interface Manifest {
   generatedAt: string;
