@@ -79,7 +79,7 @@ function SearchPageInner() {
               const slim: SlimEntry = {
                 slug: r.slug, n: r.n, k: r.k, sh: r.sh, st: r.st,
                 d7: null, d24: null, in: null, cat: r.cat, tg: r.tg,
-                sp: [], mo: null, cr: null,
+                sp: [], mo: null, cr: null, vl: null,
               };
               return (
                 <a key={r.slug} className="slip" href={`${BASE_PATH}/entry?slug=${r.slug}`}>

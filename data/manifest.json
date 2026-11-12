@@ -1,8 +1,9 @@
 {
- "generatedAt": "2026-11-12T05:13:02+00:00",
+ "generatedAt": "2026-11-12T12:41:46+00:00",
  "tabs": {
   "stars": 5000,
   "trending": 2000,
+  "velocity": 22,
   "new": 2000,
   "recent": 2000,
   "installs": 2000
@@ -46,5 +47,5 @@
   "2026-10-08",
   "2026-10-07"
  ],
- "entries": 11402
+ "entries": 11421
 }

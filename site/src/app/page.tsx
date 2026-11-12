@@ -91,7 +91,8 @@ export default function Home() {
         <>
           <div className="ledger">
             {pageRows.map((e, i) => (
-              <EntryCard key={e.slug} entry={e} rank={(page - 1) * PAGE_SIZE + i + 1} />
+              <EntryCard key={e.slug} entry={e} rank={(page - 1) * PAGE_SIZE + i + 1}
+                         showVelocity={tab === "velocity"} />
             ))}
           </div>
           <nav className="pager" aria-label="페이지">

@@ -16,6 +16,7 @@ export interface SlimEntry {
   sp: number[];         // 스파크 시리즈 (최근 14일)
   mo: number | null;    // 모멘텀 (연속 상승 일수)
   cr: string | null;    // github 생성일
+  vl: number | null;    // 7일 전 대비 성장률 (%) — 성장 속도 탭
 }
 
 /** 상세 정적 전문 — 별수(stars·delta·설치수·히스토리)는 metrics/history 합본에서 조인. */

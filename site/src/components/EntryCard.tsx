@@ -28,7 +28,8 @@ function MiniSpark({ series }: { series: number[] }) {
 }
 
 /** 랭킹 장부의 한 행(전표). 한줄 요약(20자) → 설치 명령 → repo 경로 순으로 보여준다. */
-export default function EntryCard({ entry, rank }: { entry: SlimEntry; rank?: number }) {
+export default function EntryCard({ entry, rank, showVelocity }:
+                                     { entry: SlimEntry; rank?: number; showVelocity?: boolean }) {
   const short = entry.sh?.trim();
   const avatar = avatarFromSlug(entry.slug);
   const repoPath = entry.slug;
@@ -62,7 +63,9 @@ export default function EntryCard({ entry, rank }: { entry: SlimEntry; rank?: nu
           <span className="icon">⭐</span>
           {formatNumber(entry.st)}
         </span>
-        {entry.d7 && entry.d7 > 0 ? (
+        {showVelocity && entry.vl != null ? (
+          <span className="delta">▲ {entry.vl >= 100 ? Math.round(entry.vl) : entry.vl}%<span className="unit">/7d</span></span>
+        ) : entry.d7 && entry.d7 > 0 ? (
           <span className="delta">▲ {formatNumber(entry.d7)}<span className="unit">/7d</span></span>
         ) : entry.in ? (
           <span className="installs">📥 {formatNumber(entry.in)}</span>
