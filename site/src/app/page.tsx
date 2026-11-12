@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import EntryCard from "../components/EntryCard";
 import { fetchManifest, fetchRank, filterRows } from "../lib/catalog";
 import { BASE_PATH, type Manifest, type SlimEntry } from "../lib/format";
@@ -8,8 +9,12 @@ import { CATEGORIES, KINDS, RANK_TABS } from "../lib/taxonomy";
 
 const PAGE_SIZE = 50;
 
-export default function Home() {
-  const [tab, setTab] = useState("stars");
+function HomeInner() {
+  const sp = useSearchParams();
+  const [tab, setTab] = useState(() => {
+    const t = sp.get("tab") ?? "";
+    return RANK_TABS.some((x) => x.key === t) ? t : "stars";
+  });
   const [kind, setKind] = useState<string | undefined>();
   const [category, setCategory] = useState<string | undefined>();
   const [page, setPage] = useState(1);
@@ -20,6 +25,11 @@ export default function Home() {
   useEffect(() => {
     fetchManifest().then(setManifest).catch(() => setError("데이터를 불러올 수 없습니다 — 배치가 아직 실행되지 않았을 수 있습니다."));
   }, []);
+
+  // 탭을 URL에 동기화 — 탭 링크 공유·북마크 가능
+  useEffect(() => {
+    window.history.replaceState(null, "", `${BASE_PATH}/?tab=${tab}`);
+  }, [tab]);
 
   useEffect(() => {
     setRows(null);
@@ -111,5 +121,13 @@ export default function Home() {
         </>
       )}
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<p className="empty">불러오는 중…</p>}>
+      <HomeInner />
+    </Suspense>
   );
 }
