@@ -44,7 +44,11 @@ export default function EntryDetailInner() {
       })
       .catch(() => setMetrics(null));
     fetchHistory()
-      .then((h) => setHistory((h[slug] ?? []).map(([d, v]) => ({ d: String(d), v }))))
+      .then((h) => setHistory((h[slug] ?? []).map(([d, v]) => {
+        // history.json은 압축형(YYYYMMDD 정수) — 차트가 기대하는 YYYY-MM-DD로 변환
+        const s = String(d);
+        return { d: `${s.slice(0, 4)}-${s.slice(4, 6)}-${s.slice(6, 8)}`, v };
+      })))
       .catch(() => setHistory([]));
   }, [slug]);
 
