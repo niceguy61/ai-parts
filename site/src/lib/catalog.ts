@@ -41,8 +41,27 @@ export function fetchSearchIndex(): Promise<SearchRow[]> {
   return fetchJSON<SearchRow[]>(`${DATA}/search/index.json`);
 }
 
+/** entry/{slug}.json — export의 _entry_filename과 동일 규칙 (Windows 안전 파일명). */
+function entryFilePath(slug: string): string {
+  const i = slug.indexOf("/");
+  const owner = i >= 0 ? slug.slice(0, i) : "";
+  let repo = i >= 0 ? slug.slice(i + 1) : slug;
+  repo = repo.replace(/[<>:"/\\|?*\x00-\x1f]/g, "_").replace(/[. ]+$/, "");
+  const upper = repo.toUpperCase();
+  if (["CON", "PRN", "AUX", "NUL", ...Array.from({ length: 9 }, (_, k) => `COM${k + 1}`),
+       ...Array.from({ length: 9 }, (_, k) => `LPT${k + 1}`)].includes(upper)) {
+    repo = `_${repo}`;
+  }
+  if (repo.length > 80) {
+    let x = 5381;
+    for (let k = 0; k < repo.length; k++) x = ((x * 33) ^ repo.charCodeAt(k)) >>> 0;
+    repo = `${repo.slice(0, 70)}-${x.toString(16).padStart(8, "0")}`;
+  }
+  return owner ? `${owner}/${repo}.json` : `${repo}.json`;
+}
+
 export function fetchEntry(slug: string): Promise<EntryDetail> {
-  return fetchJSON<EntryDetail>(`${DATA}/entry/${slug}.json`);
+  return fetchJSON<EntryDetail>(`${DATA}/entry/${entryFilePath(slug)}`);
 }
 
 /** metrics.json — {slug: [st, d7, d24, in, npm]} (별수 지표 합본) */
