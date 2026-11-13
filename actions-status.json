@@ -1,28 +1,28 @@
 {
-  "total_count": 18,
+  "total_count": 33,
   "workflow_runs": [
     {
-      "id": 42973127987,
+      "id": 43343121645,
       "name": "Deploy to GitHub Pages",
-      "node_id": "WFR_kwLOVqB25M8AAAAKAWXlMw",
+      "node_id": "WFR_kwLOVqB25M8AAAAKF3OM7Q",
       "head_branch": "main",
-      "head_sha": "29cee06caf9e1cb4de721850d62be3b72bdb791d",
+      "head_sha": "b043eceae9b5fa4ea8b3b5c1d69886b8c479bc3f",
       "path": ".github/workflows/deploy.yml",
-      "display_title": "fix: search matches name only with relevance ranking; apply URL q par…",
-      "run_number": 18,
+      "display_title": "deploy: 2026-11-13 01:12 UTC",
+      "run_number": 33,
       "event": "push",
       "status": "completed",
       "conclusion": "success",
       "workflow_id": 414067136,
-      "check_suite_id": 116375530984,
-      "check_suite_node_id": "CS_kwDOVqB25M8AAAAbGIWt6A",
-      "url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987",
-      "html_url": "https://github.com/niceguy61/ai-parts/actions/runs/42973127987",
+      "check_suite_id": 117370829690,
+      "check_suite_node_id": "CS_kwDOVqB25M8AAAAbU9i7eg",
+      "url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/43343121645",
+      "html_url": "https://github.com/niceguy61/ai-parts/actions/runs/43343121645",
       "pull_requests": [
 
       ],
-      "created_at": "2026-11-11T06:32:19Z",
-      "updated_at": "2026-11-11T06:33:12Z",
+      "created_at": "2026-11-13T01:12:24Z",
+      "updated_at": "2026-11-13T01:13:15Z",
       "actor": {
         "login": "niceguy61",
         "id": 23160963,
@@ -48,7 +48,7 @@
       "referenced_workflows": [
 
       ],
-      "run_started_at": "2026-11-11T06:32:19Z",
+      "run_started_at": "2026-11-13T01:12:24Z",
       "triggering_actor": {
         "login": "niceguy61",
         "id": 23160963,
@@ -70,26 +70,26 @@
         "user_view_type": "public",
         "site_admin": false
       },
-      "jobs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/jobs",
-      "logs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/logs",
-      "check_suite_url": "https://api.github.com/repos/niceguy61/ai-parts/check-suites/116375530984",
-      "artifacts_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/artifacts",
-      "cancel_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/cancel",
-      "rerun_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/42973127987/rerun",
+      "jobs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/43343121645/jobs",
+      "logs_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/43343121645/logs",
+      "check_suite_url": "https://api.github.com/repos/niceguy61/ai-parts/check-suites/117370829690",
+      "artifacts_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/43343121645/artifacts",
+      "cancel_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/43343121645/cancel",
+      "rerun_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/runs/43343121645/rerun",
       "previous_attempt_url": null,
       "workflow_url": "https://api.github.com/repos/niceguy61/ai-parts/actions/workflows/414067136",
       "head_commit": {
-        "id": "29cee06caf9e1cb4de721850d62be3b72bdb791d",
-        "tree_id": "831f1895049e8d9b992bf4fff608d040d345dd50",
-        "message": "fix: search matches name only with relevance ranking; apply URL q param on load",
-        "timestamp": "2026-11-11T06:32:15Z",
+        "id": "b043eceae9b5fa4ea8b3b5c1d69886b8c479bc3f",
+        "tree_id": "6312ff41164b9b049e6cfc905081c0f137fd35cb",
+        "message": "deploy: 2026-11-13 01:12 UTC",
+        "timestamp": "2026-11-13T01:12:17Z",
         "author": {
-          "name": "niceguy61",
-          "email": "niceguy61@naver.com"
+          "name": "ai-insight-bot",
+          "email": "bot@local"
         },
         "committer": {
-          "name": "niceguy61",
-          "email": "niceguy61@naver.com"
+          "name": "ai-insight-bot",
+          "email": "bot@local"
         }
       },
       "repository": {
