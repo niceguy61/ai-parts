@@ -69,8 +69,8 @@ export default function StarChart({ points }: { points: StarPoint[] }) {
         secondsVisible: false,
       },
       crosshair: {
-        vertLine: { color: "#6c8cff", width: 1, style: 3, labelBackgroundColor: "#6c8cff", labelTextColor: "#0b0e14" },
-        horzLine: { color: "#6c8cff", width: 1, style: 3, labelBackgroundColor: "#6c8cff", labelTextColor: "#0b0e14" },
+        vertLine: { color: "#6c8cff", width: 1, style: 3, labelBackgroundColor: "#6c8cff" },
+        horzLine: { color: "#6c8cff", width: 1, style: 3, labelBackgroundColor: "#6c8cff" },
       },
       localization: {
         priceFormatter: (p: number) => p.toLocaleString("ko-KR"),
