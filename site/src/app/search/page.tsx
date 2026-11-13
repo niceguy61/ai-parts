@@ -42,7 +42,7 @@ function SearchPageInner() {
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
 
   return (
-    <div>
+    <div className="container page">
       <form className="searchline" onSubmit={(e) => { e.preventDefault(); setPage(1); }}>
         <input
           type="search"

@@ -63,7 +63,7 @@ export default function EntryDetailInner() {
   const npmMonthly = metrics?.npm ?? null;
 
   return (
-    <article className="detail">
+    <article className="detail container page">
       <h1>
         {avatarFromSlug(entry.slug) ? (
           // eslint-disable-next-line @next/next/no-img-element

@@ -27,7 +27,7 @@ export default function ArchivePage() {
   }, [date]);
 
   return (
-    <div>
+    <div className="container page">
       <h1 style={{ fontSize: 20, margin: "20px 0 6px" }}>아카이브</h1>
       <p className="summary" style={{ color: "#5c6066", fontSize: 13 }}>
         날짜별 스냅샷으로 그날의 랭킹을 그대로 봅니다.
