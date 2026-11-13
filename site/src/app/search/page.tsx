@@ -96,7 +96,7 @@ function SearchPageInner() {
                     {r.sh ? <span className="brief">{r.sh}</span> : null}
                   </span>
                   <span className="nums">
-                    <span className="stars"><span className="icon">⭐</span>{formatNumber(r.st)}</span>
+                    <span className="stars"><span {formatNumber(r.st)}</span>
                   </span>
                 </a>
               );

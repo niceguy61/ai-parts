@@ -49,36 +49,37 @@ export default function StarChart({ points }: { points: StarPoint[] }) {
     const el = containerRef.current;
     if (!el) return;
 
+    // 색상 리터럴: lightweight-charts는 문자열 색만 받음 — 테마 토큰 미러(#6c8cff 액센트 · #939cad muted · #242b38/#2c3648 보더 계열). 토큰 변경 시 함께 갱신.
     const chart = createChart(el, {
       autoSize: true,
       layout: {
         background: { color: "transparent" },
-        textColor: "#5c6066",
+        textColor: "#939cad",
         fontFamily: "var(--sans)",
         attributionLogo: false,
       },
       grid: {
-        vertLines: { color: "#ecebe4" },
-        horzLines: { color: "#ecebe4" },
+        vertLines: { color: "#242b3a" },
+        horzLines: { color: "#242b3a" },
       },
-      rightPriceScale: { borderColor: "#e3e0d8" },
+      rightPriceScale: { borderColor: "#2c3648" },
       timeScale: {
-        borderColor: "#e3e0d8",
+        borderColor: "#2c3648",
         timeVisible: false,
         secondsVisible: false,
       },
       crosshair: {
-        vertLine: { color: "#2e4de6", width: 1, style: 3, labelBackgroundColor: "#2e4de6" },
-        horzLine: { color: "#2e4de6", width: 1, style: 3, labelBackgroundColor: "#2e4de6" },
+        vertLine: { color: "#6c8cff", width: 1, style: 3, labelBackgroundColor: "#6c8cff", labelTextColor: "#0b0e14" },
+        horzLine: { color: "#6c8cff", width: 1, style: 3, labelBackgroundColor: "#6c8cff", labelTextColor: "#0b0e14" },
       },
       localization: {
         priceFormatter: (p: number) => p.toLocaleString("ko-KR"),
       },
     });
     const series = chart.addSeries(AreaSeries, {
-      lineColor: "#2e4de6",
-      topColor: "rgba(46, 77, 230, 0.18)",
-      bottomColor: "rgba(46, 77, 230, 0.02)",
+      lineColor: "#6c8cff",
+      topColor: "rgba(108, 140, 255, 0.15)",
+      bottomColor: "rgba(108, 140, 255, 0.02)",
       lineWidth: 2,
       priceLineVisible: false,
     });
@@ -110,7 +111,7 @@ export default function StarChart({ points }: { points: StarPoint[] }) {
 
   return (
     <div>
-      <div style={{ display: "flex", gap: 6, marginBottom: 8 }}>
+      <div className="rangeline">
         {RANGES.map((r) => (
           <button
             key={r.days}
@@ -123,7 +124,7 @@ export default function StarChart({ points }: { points: StarPoint[] }) {
           </button>
         ))}
       </div>
-      <div ref={containerRef} style={{ width: "100%", height: 260 }} />
+      <div ref={containerRef} className="starplot" />
     </div>
   );
 }

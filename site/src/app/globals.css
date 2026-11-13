@@ -29,9 +29,7 @@
 html, body {
   margin: 0;
   padding: 0;
-  background:
-    radial-gradient(1200px 500px at 70% -10%, rgba(108, 140, 255, 0.07), transparent 60%),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   font-size: 15px;
@@ -49,8 +47,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* ---------- 헤더 ---------- */
 header.site {
   border-bottom: 1px solid var(--border);
-  background: rgba(11, 14, 20, 0.85);
-  backdrop-filter: blur(12px);
+  background: rgba(11, 14, 20, 0.92);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -80,20 +77,19 @@ header.site nav a:hover { color: var(--text); }
   border-radius: 10px;
 }
 .searchline input::placeholder { color: #5a6172; }
-.searchline input:focus { border-color: var(--accent); outline: none; }
+.searchline input:focus { border-color: var(--accent); }
 .searchline button, .btn {
   font: 600 14px var(--sans);
-  padding: 10px 20px;
+  padding: 12px 20px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  background: var(--accent-strong);
   color: #fff;
   cursor: pointer;
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  transition: filter 0.15s ease;
 }
 .searchline button:hover, .btn:hover {
-  box-shadow: 0 0 0 3px var(--accent-soft), 0 4px 16px rgba(108, 140, 255, 0.25);
-  transform: translateY(-1px);
+  filter: brightness(0.94);
 }
 
 .select {
@@ -108,7 +104,7 @@ header.site nav a:hover { color: var(--text); }
 /* ---------- 랭킹 탭 ---------- */
 .ranktabs {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   margin: 20px 0 0;
   padding: 4px;
   background: var(--panel);
@@ -131,15 +127,15 @@ header.site nav a:hover { color: var(--text); }
 .ranktabs .on, .ranktabs a.on {
   background: var(--accent-soft);
   color: var(--accent);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 /* ---------- 종류 세그먼트 ---------- */
 .kinds { display: flex; gap: 4px; margin: 14px 0 0; font-size: 13px; flex-wrap: wrap; }
 .kinds button, .kinds a {
-  padding: 5px 14px;
+  padding: 4px 12px;
   border: 1px solid transparent;
-  border-radius: 999px;
+  border-radius: 8px;
   background: transparent;
   color: var(--muted);
   cursor: pointer;
@@ -154,12 +150,12 @@ header.site nav a:hover { color: var(--text); }
 }
 
 /* ---------- 카테고리 칩 ---------- */
-.cats { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 0; }
+.cats { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; }
 .cats button, .cats a {
   font-size: 12px;
   padding: 4px 12px;
   border: 1px solid var(--border);
-  border-radius: 999px;
+  border-radius: 8px;
   color: var(--muted);
   background: var(--panel);
   cursor: pointer;
@@ -180,7 +176,7 @@ header.site nav a:hover { color: var(--text); }
   display: grid;
   grid-template-columns: 44px minmax(0, 1fr) 84px auto;
   gap: 16px;
-  padding: 13px 18px;
+  padding: 12px 18px;
   border-bottom: 1px solid var(--border);
   align-items: center;
   transition: background 0.12s ease;
@@ -207,7 +203,7 @@ header.site nav a:hover { color: var(--text); }
   background: var(--panel-2);
 }
 .slip .name {
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14.5px;
   white-space: nowrap;
   overflow: hidden;
@@ -238,7 +234,7 @@ header.site nav a:hover { color: var(--text); }
 }
 .slip .cmd {
   display: block;
-  margin-top: 6px;
+  margin-top: 8px;
   font: 12px var(--mono);
   color: var(--accent);
   background: var(--bg);
@@ -253,6 +249,8 @@ header.site nav a:hover { color: var(--text); }
 .slip .pending { display: block; margin-top: 4px; font-size: 12px; color: var(--wait); }
 .slip .sparkcell { display: flex; justify-content: flex-end; }
 .slip .spark { display: block; width: 72px; height: 26px; }
+.spark polyline { stroke: var(--muted); }
+.spark.up polyline { stroke: var(--rise); }
 .slip .nums {
   display: flex;
   flex-direction: column;
@@ -262,17 +260,12 @@ header.site nav a:hover { color: var(--text); }
   min-width: 96px;
 }
 .slip .stars { font: 600 13px var(--mono); color: var(--text); }
-.slip .stars .icon { margin-right: 4px; }
 .slip .delta { font: 600 12px var(--mono); color: var(--rise); }
 .slip .delta .unit { color: var(--muted); font-weight: 400; }
 .slip .installs { font: 12px var(--mono); color: var(--muted); }
 .slip .momtag {
   font: 600 11px var(--sans);
   color: var(--rise);
-  border: 1px solid rgba(61, 220, 151, 0.35);
-  background: rgba(61, 220, 151, 0.08);
-  border-radius: 999px;
-  padding: 1px 8px;
   flex: none;
   white-space: nowrap;
 }
@@ -281,11 +274,11 @@ header.site nav a:hover { color: var(--text); }
 .detail h1 {
   font-size: 28px;
   line-height: 1.15;
-  margin: 32px 0 10px;
+  margin: 32px 0 12px;
   letter-spacing: -0.025em;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 .detail .davatar {
   width: 48px;
@@ -344,7 +337,7 @@ header.site nav a:hover { color: var(--text); }
 .detail .section { margin: 36px 0; }
 .detail .section > h2 {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--text);
   margin: 0 0 14px;
   padding-bottom: 10px;
@@ -362,9 +355,10 @@ header.site nav a:hover { color: var(--text); }
   flex: none;
 }
 .detail .prose { max-width: 72ch; font-size: 15px; line-height: 1.8; }
+.detail .prose + .prose { margin-top: 12px; }
 .detail .shortline {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--accent);
   margin: 0 0 14px;
 }
@@ -385,12 +379,10 @@ header.site nav a:hover { color: var(--text); }
 }
 .detail .slipbox .row + .row { border-top: 1px solid var(--border); }
 .detail .slipbox .t {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--accent);
-  min-width: 90px;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
+  min-width: 84px;
+  font-weight: 500;
 }
 .detail .slipbox code { flex: 1; word-break: break-all; color: var(--text); }
 .detail .slipbox .copy {
@@ -458,7 +450,7 @@ header.site nav a:hover { color: var(--text); }
   background: var(--panel);
   color: var(--text);
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: color 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
 }
 .jobbtns button:hover:not(:disabled) {
   border-color: var(--accent);
@@ -474,7 +466,7 @@ header.site nav a:hover { color: var(--text); }
 .badge {
   display: inline-block;
   padding: 2px 10px;
-  border-radius: 999px;
+  border-radius: 6px;
   font-size: 11px;
   font-weight: 600;
   border: 1px solid var(--border-strong);
@@ -483,6 +475,22 @@ header.site nav a:hover { color: var(--text); }
 .badge.ok, .badge.up { color: var(--rise); border-color: rgba(61, 220, 151, 0.4); background: rgba(61, 220, 151, 0.08); }
 .badge.error, .badge.pending { color: var(--wait); border-color: rgba(255, 184, 107, 0.4); background: rgba(255, 184, 107, 0.08); }
 .badge.kind { color: var(--accent); border-color: rgba(108, 140, 255, 0.4); }
+
+/* ---------- 차트 ---------- */
+.rangeline { display: flex; gap: 4px; margin-bottom: 8px; flex-wrap: wrap; }
+.rangebtn {
+  font: 600 12px var(--sans);
+  font-family: var(--sans);
+  padding: 6px 12px;
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.rangebtn:hover { border-color: var(--accent); color: var(--accent); }
+.rangebtn[aria-pressed="true"] { color: var(--text); border-color: var(--accent); }
+.starplot { width: 100%; height: 260px; }
 
 /* ---------- 빈 상태 / 페이저 ---------- */
 .empty { color: var(--muted); padding: 48px 0; text-align: center; font-size: 14px; }

@@ -74,9 +74,9 @@ export default function EntryDetailInner() {
       <div className="subline">
         <span className="chip accent">{KIND_LABEL[entry.kind] ?? entry.kind}</span>
         {entry.category ? <span className="chip">{entry.category}</span> : null}
-        <span className="chip gold">⭐ {st.toLocaleString()}</span>
+        <span className="chip gold">{st.toLocaleString()}</span>
         {d7 && d7 > 0 ? <span className="chip rise">▲ +{d7.toLocaleString()} / 7d</span> : null}
-        {installs ? <span className="chip">📥 {installs.toLocaleString()}</span> : null}
+        {installs ? <span className="chip">{installs.toLocaleString()}</span> : null}
         {npmMonthly ? <span className="chip">npm/월 {npmMonthly.toLocaleString()}</span> : null}
         {entry.license ? <span className="chip">{entry.license}</span> : null}
         {entry.repo ? <span className="chip">{entry.repo.replace("https://github.com/", "")}</span> : null}
