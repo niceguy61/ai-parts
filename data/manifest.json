@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-14T08:50:22+00:00",
+ "generatedAt": "2026-11-14T09:25:50+00:00",
  "tabs": {
   "stars": 5000,
   "trending": 2000,
@@ -7,6 +7,25 @@
   "new": 2000,
   "recent": 2000,
   "installs": 2000
+ },
+ "kinds": {
+  "stars-mcp": 2853,
+  "stars-skill": 3709,
+  "stars-library": 3945,
+  "trending-mcp": 2000,
+  "trending-skill": 2000,
+  "trending-plugin": 146,
+  "trending-library": 2000,
+  "new-mcp": 1324,
+  "new-skill": 1725,
+  "new-library": 1382,
+  "recent-mcp": 2000,
+  "recent-skill": 2000,
+  "recent-library": 2000,
+  "installs-mcp": 2000,
+  "installs-skill": 2000,
+  "installs-plugin": 146,
+  "installs-library": 2000
  },
  "archiveDates": [
   "2026-11-14",

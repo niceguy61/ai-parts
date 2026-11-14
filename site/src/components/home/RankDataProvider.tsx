@@ -64,6 +64,8 @@ export function RankDataProvider({ children }: { children: React.ReactNode }) {
   const [page, setPage] = useState(1);
   const [manifest, setManifest] = useState<Manifest | null>(null);
   const [rows, setRows] = useState<SlimEntry[] | null>(null);
+  /** 종류 칩 선택 시 읽는 보완 슬라이스 — 탭 상위 컷에서 잘린 종류용 (manifest.kinds). */
+  const [kindRows, setKindRows] = useState<SlimEntry[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [sharedSlugs, setSharedSlugs] = useState<string[]>([]);
   const [sharedEntries, setSharedEntries] = useState<SharedEntry[]>([]);
@@ -105,10 +107,26 @@ export function RankDataProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     if (!urlReady) return;
     setRows(null);
+    setKindRows(null);
     fetchRank(tab)
       .then(setRows)
       .catch(() => setError("랭킹 데이터를 불러오지 못했습니다."));
   }, [tab, urlReady]);
+
+  // 종류 칩 — 탭 상위 컷에서 잘린 종류는 전용 슬라이스 파일을 읽는다.
+  // (설치수 탭: 스킬 3.5만이 상위 2000을 채워 플러그인이 잘리는 문제)
+  useEffect(() => {
+    if (!urlReady) return;
+    const key = kind ? `${tab}-${kind}` : null;
+    if (key && manifest?.kinds?.[key]) {
+      setKindRows(null);
+      fetchRank(key)
+        .then(setKindRows)
+        .catch(() => setKindRows(null));
+    } else {
+      setKindRows(null);
+    }
+  }, [tab, kind, urlReady, manifest]);
 
   // 공유 링크(?saved=)로 들어오면 그 항목들의 이름을 상세 JSON에서 채운다.
   useEffect(() => {
@@ -155,11 +173,11 @@ export function RankDataProvider({ children }: { children: React.ReactNode }) {
   }, [tab, urlReady]);
 
   const filtered = useMemo(() => {
-    let r = rows ?? [];
-    if (kind) r = r.filter((e) => e.k === kind);
+    let r = (kind && kindRows ? kindRows : rows) ?? [];
+    if (kind && !kindRows) r = r.filter((e) => e.k === kind);
     if (category) r = r.filter((e) => e.cat === category);
     return r;
-  }, [rows, kind, category]);
+  }, [rows, kindRows, kind, category]);
 
   const pageRows = useMemo<ListRow[]>(() => {
     const start = (page - 1) * PAGE_SIZE;
@@ -201,7 +219,7 @@ export function RankDataProvider({ children }: { children: React.ReactNode }) {
       sharedStatus,
     }),
     [
-      tab, view, rows, filtered, pageRows, page, totalPages, kind, category,
+      tab, view, rows, kindRows, filtered, pageRows, page, totalPages, kind, category,
       manifest, error, sharedSlugs, sharedEntries, sharedStatus,
     ],
   );

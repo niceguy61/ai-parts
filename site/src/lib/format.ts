@@ -53,6 +53,8 @@ export type EntryHistoryPoint = { d: string; v: number };
 export interface Manifest {
   generatedAt: string;
   tabs: Record<string, number>;
+  /** 종류별 보완 랭킹 슬라이스 — 키 "{tab}-{kind}" → 행 수. 있으면 칩 선택 시 그 파일을 읽는다. */
+  kinds?: Record<string, number>;
   archiveDates: string[];
   entries: number;
 }
