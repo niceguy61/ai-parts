@@ -26,7 +26,7 @@ export default function Faq() {
   return (
     <section className="section" id="faq" aria-labelledby="faq-title">
       <div className="wrap grid">
-        <div className="span-5">
+        <div className="span-5 faq__intro">
           <h2 id="faq-title">자주 묻는 질문</h2>
           <p>
             수집 방식과 저장 방식에 대해 자주 물어보는 내용을 모았습니다. 다른 궁금한 점이 있으면

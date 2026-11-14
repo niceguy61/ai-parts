@@ -983,6 +983,8 @@ main > section.hero > .wrap { display: flex; flex-direction: column; justify-con
 .card p { margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
 .panel {
   margin-top: 24px;
+  /* 카드(flex column) 안에서 남는 높이를 채워 3열 배치에서 패널 바닥을 맞춘다 */
+  flex: 1 1 auto;
   padding: 16px;
   border: 1px solid var(--border);
   border-radius: var(--r-md);
@@ -1060,6 +1062,7 @@ main > section.hero > .wrap { display: flex; flex-direction: column; justify-con
 
 /* ---------- FAQ ---------- */
 .faq { border-top: 1px solid var(--border); }
+.faq__intro { align-self: center; }  /* 질문 열이 길어 좌측 제목 블록 아래가 텅 비지 않게 */
 .faq__item { padding: 20px 0; border-bottom: 1px solid var(--border); }
 .faq__item h3 { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; }
 .faq__item p { margin: 0; font-size: 15px; line-height: 1.65; color: var(--muted); }

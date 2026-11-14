@@ -1,0 +1,1 @@
+{"slug":"footya/arch-diagrammer","kind":"skill","name":"用于快速产出**架构图 / 流程图 / 时序图 / 部署图**等可视化交付物，常见输出为 `.svg`（可离线打开）或 `.html`（浏览器直接预览）","short":null,"summary":null,"usage":null,"install":null,"tags":[],"category":null,"repo":null,"homepage":null,"license":null,"createdAt":null,"appearances":[{"source":"clawhub","external_id":"footya/arch-diagrammer","url":null,"metrics":{}}]}
