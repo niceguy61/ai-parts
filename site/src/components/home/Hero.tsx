@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { fetchRank } from "../../lib/catalog";
-import { BASE_PATH, formatNumber, KIND_LABEL, type SlimEntry } from "../../lib/format";
+import { BASE_PATH, avatarFromSlug, formatNumber, KIND_LABEL, type SlimEntry } from "../../lib/format";
 
 /** 히어로 — 문장 하나와 실제 랭킹 화면 한 창. */
 export default function Hero() {
@@ -55,7 +55,13 @@ export default function Hero() {
                   <li key={row.slug}>
                     <span className="win__rank">{String(i + 1).padStart(2, "0")}</span>
                     <span className={`ktag ${row.k}`}>{KIND_LABEL[row.k] ?? row.k}</span>
-                    <span className="win__name">{row.n}</span>
+                    <span className="win__name">
+                      {avatarFromSlug(row.slug) ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img className="avatar" src={avatarFromSlug(row.slug)!} alt="" width={18} height={18} loading="lazy" />
+                      ) : null}
+                      <span className="win__name-text">{row.n}</span>
+                    </span>
                     <span className="win__stars">{formatNumber(row.st)}</span>
                   </li>
                 ))}

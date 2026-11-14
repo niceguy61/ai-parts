@@ -3,6 +3,7 @@ import "./globals.css";
 import { BASE_PATH } from "../lib/format";
 import DataTimestamp from "../components/DataTimestamp";
 import { SavedProvider } from "../components/SavedProvider";
+import HeaderSavedLink from "../components/HeaderSavedLink";
 
 export const metadata: Metadata = {
   title: "ai_insight — AI 부품 랭킹 포털",
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <a href={`${BASE_PATH}/#faq`}>FAQ</a>
               </nav>
               <div className="nav__actions">
+                <HeaderSavedLink />
                 <a className="btn btn--primary nav__cta" href={`${BASE_PATH}/#ranking`}>
                   랭킹 보기
                 </a>

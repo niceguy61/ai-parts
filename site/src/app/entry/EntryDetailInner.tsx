@@ -4,6 +4,9 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import InstallCommands from "../../components/InstallCommands";
 import StarChart from "../../components/StarChart";
+import SavedButton from "../../components/SavedButton";
+import { useSaved } from "../../components/SavedProvider";
+import { toSavedEntry } from "../../lib/saved";
 import { fetchEntry, fetchHistory, fetchMetrics } from "../../lib/catalog";
 import { BASE_PATH, KIND_LABEL, avatarFromSlug } from "../../lib/format";
 import type { EntryDetail, EntryHistoryPoint, EntryMetrics } from "../../lib/format";
@@ -26,6 +29,7 @@ export default function EntryDetailInner() {
   const [metrics, setMetrics] = useState<EntryMetrics | null>(null);
   const [history, setHistory] = useState<EntryHistoryPoint[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const saved = useSaved();
 
   useEffect(() => {
     if (!slug) return;
@@ -91,6 +95,17 @@ export default function EntryDetailInner() {
         <a className="ghost" href={`${BASE_PATH}/`}>
           랭킹으로
         </a>
+        <SavedButton
+          entry={toSavedEntry({
+            slug: entry.slug,
+            n: entry.name,
+            k: entry.kind,
+            st,
+            sh: entry.short ?? null,
+          })}
+          saved={saved.isSaved(entry.slug)}
+          onToggle={saved.toggle}
+        />
       </div>
 
       <section className="section">

@@ -3,13 +3,6 @@
 import { formatNumber } from "../../lib/format";
 import { useRankData } from "./RankDataProvider";
 
-const STEPS = [
-  { name: "수집", body: "GitHub·skills.sh·ClawHub·MCP Registry·npm을 돌아다니며 새 항목을 긁어옵니다." },
-  { name: "정리", body: "같은 저장소를 한 항목으로 합치고 태그·테마·설치 명령을 붙입니다." },
-  { name: "요약", body: "한줄 요약과 사용 방법을 LLM이 한국어로 정리합니다." },
-  { name: "게시", body: "별수·증가량·설치수 기준 랭킹 JSON으로 내보내 사이트에 올립니다." },
-];
-
 /** 수집 파이프라인 — 어디서 항목이 오고 어떻게 게시되는지. */
 export default function Sources() {
   const rank = useRankData();
@@ -29,17 +22,10 @@ export default function Sources() {
 
         <div className="frame frame--hero span-12">
           <div className="stage pipeline">
-            <ol className="pipeline__steps">
-              {STEPS.map((s, i) => (
-                <li key={s.name}>
-                  <span className="pipeline__num">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="pipeline__name">{s.name}</span>
-                </li>
-              ))}
-            </ol>
-            <div className="pipeline__body">
+            <div className="pipeline__cols">
               <div className="pipeline__col">
-                <p className="pipeline__label">소스</p>
+                <h3 className="pipeline__step"><span className="pipeline__num">01</span>수집</h3>
+                <p className="pipeline__label">소스 · 주기</p>
                 <ul className="pipeline__list">
                   <li><span>GitHub</span><span>6시간마다</span></li>
                   <li><span>skills.sh</span><span>12시간마다</span></li>
@@ -48,6 +34,11 @@ export default function Sources() {
                 </ul>
               </div>
               <div className="pipeline__col">
+                <h3 className="pipeline__step"><span className="pipeline__num">02</span>정리</h3>
+                <p className="pipeline__desc">같은 저장소를 한 항목으로 합치고, 태그·테마·설치 명령을 붙여 목록에 올릴 형태로 만듭니다.</p>
+              </div>
+              <div className="pipeline__col">
+                <h3 className="pipeline__step"><span className="pipeline__num">03</span>요약</h3>
                 <p className="pipeline__label">게시된 항목</p>
                 {total !== null ? (
                   <p className="pipeline__total">{total.toLocaleString()}개</p>
@@ -63,16 +54,13 @@ export default function Sources() {
                   ))}
                 </ul>
               </div>
+              <div className="pipeline__col">
+                <h3 className="pipeline__step"><span className="pipeline__num">04</span>게시</h3>
+                <p className="pipeline__desc">별수·증가량·설치수 기준 랭킹 JSON으로 내보내, 사이트가 서버 없이 정적 파일로 열립니다.</p>
+              </div>
             </div>
           </div>
         </div>
-
-        {STEPS.map((s) => (
-          <div className="span-3" key={s.name}>
-            <h3>{s.name}</h3>
-            <p>{s.body}</p>
-          </div>
-        ))}
       </div>
     </section>
   );

@@ -4,7 +4,7 @@ import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import EntryCard from "../../components/EntryCard";
 import { fetchSearchIndex, filterRows, type SearchRow } from "../../lib/catalog";
-import { BASE_PATH, avatarFromSlug, formatNumber, KIND_LABEL, type SlimEntry } from "../../lib/format";
+import { BASE_PATH, type SlimEntry } from "../../lib/format";
 import { CATEGORIES, KINDS } from "../../lib/taxonomy";
 
 const PAGE_SIZE = 50;
@@ -82,23 +82,11 @@ function SearchPageInner() {
                 sp: [], mo: null, cr: null, vl: null,
               };
               return (
-                <a key={r.slug} className="slip" href={`${BASE_PATH}/entry?slug=${r.slug}`}>
-                  <span className="rank">{String((page - 1) * PAGE_SIZE + i + 1).padStart(2, "0")}</span>
-                  <span className="who">
-                    <span className="titlerow">
-                      {avatarFromSlug(r.slug) ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img className="avatar" src={avatarFromSlug(r.slug)!} alt="" width={22} height={22} loading="lazy" />
-                      ) : null}
-                      <span className={`ktag ${r.k}`}>{KIND_LABEL[r.k] ?? r.k}</span>
-                      <span className="name">{r.n}</span>
-                    </span>
-                    {r.sh ? <span className="brief">{r.sh}</span> : null}
-                  </span>
-                  <span className="nums">
-                    <span className="stars">{formatNumber(r.st)}</span>
-                  </span>
-                </a>
+                <EntryCard
+                  key={r.slug}
+                  entry={slim}
+                  rank={(page - 1) * PAGE_SIZE + i + 1}
+                />
               );
             })}
           </div>

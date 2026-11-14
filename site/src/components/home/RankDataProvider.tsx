@@ -7,6 +7,7 @@ import { RANK_TABS } from "../../lib/taxonomy";
 import { parseSavedSlugs } from "../../lib/saved";
 
 const PAGE_SIZE = 50;
+export { PAGE_SIZE };
 
 /** 목록 한 줄 — 랭킹 행·저장 목록·공유 목록이 모두 이 모양으로 그려진다. */
 export interface ListRow {
@@ -77,6 +78,21 @@ export function RankDataProvider({ children }: { children: React.ReactNode }) {
     if (RANK_TABS.some((x) => x.key === t)) setTabState(t);
     setSharedSlugs(parseSavedSlugs(params.get("saved")));
     setUrlReady(true);
+  }, []);
+
+  // #saved 해시면 내 목록 뷰를 연다 — 헤더·푸터의 "내 목록" 링크.
+  // 브라우저 기본 앵커 스크롤(SavedSplit 섹션) 대신 랭킹 앱 목록으로 옮겨준다.
+  useEffect(() => {
+    const applyHash = () => {
+      if (window.location.hash !== "#saved") return;
+      setView("saved");
+      requestAnimationFrame(() => {
+        document.getElementById("ranklist")?.scrollIntoView({ block: "start" });
+      });
+    };
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
   }, []);
 
   useEffect(() => {

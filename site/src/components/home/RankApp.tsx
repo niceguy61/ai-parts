@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { BASE_PATH, formatNumber, KIND_LABEL } from "../../lib/format";
+import { BASE_PATH, avatarFromSlug, formatNumber, KIND_LABEL } from "../../lib/format";
 import { CATEGORIES, KINDS, RANK_TABS } from "../../lib/taxonomy";
 import { toSavedEntry } from "../../lib/saved";
 import SavedButton from "../SavedButton";
 import Sparkline from "../Sparkline";
 import { useSaved } from "../SavedProvider";
-import { useRankData, type ListRow } from "./RankDataProvider";
+import { useRankData, PAGE_SIZE, type ListRow } from "./RankDataProvider";
 
 /** 랭킹 앱 — 목록(왼쪽)과 열린 항목(오른쪽). 실제 제품 화면이다. */
 export default function RankApp() {
@@ -170,10 +170,16 @@ export default function RankApp() {
                   ? "저장한 항목이 없습니다. 목록에서 저장 버튼을 누르면 여기에 모입니다."
                   : rank.view === "shared"
                     ? "공유 링크의 항목을 불러오지 못했습니다."
-                    : "불러오는 중…"}
+                    : rank.rows === null
+                      ? "불러오는 중…"
+                      : rank.kind || rank.category
+                        ? "조건에 맞는 항목이 없습니다 — 종류·테마를 바꿔 보세요."
+                        : "랭킹 데이터가 아직 비어 있습니다."}
               </p>
             ) : (
-              listRows.map((r, i) => (
+              listRows.map((r, i) => {
+                const rankNo = rank.view === "rank" ? (rank.page - 1) * PAGE_SIZE + i + 1 : i + 1;
+                return (
                 <button
                   key={r.slug}
                   type="button"
@@ -184,8 +190,12 @@ export default function RankApp() {
                   className="aprow"
                   onClick={() => setSelectedSlug(r.slug)}
                 >
-                  <span className="aprow__rank">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="aprow__rank">{String(rankNo).padStart(2, "0")}</span>
                   <span className="aprow__name">
+                    {avatarFromSlug(r.slug) ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img className="avatar" src={avatarFromSlug(r.slug)!} alt="" width={20} height={20} loading="lazy" />
+                    ) : null}
                     <span className={`ktag ${r.k}`}>{KIND_LABEL[r.k] ?? r.k}</span>
                     <span className="aprow__title">{r.n}</span>
                   </span>
@@ -195,7 +205,8 @@ export default function RankApp() {
                     {r.d7 && r.d7 > 0 ? <span className="delta">▲{formatNumber(r.d7)}</span> : null}
                   </span>
                 </button>
-              ))
+                );
+              })
             )}
           </div>
 
